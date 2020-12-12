@@ -1109,6 +1109,8 @@ const routes = [
     { path: 'booksByAuthor', component: _components_booksbyauthor_BooksByAuthorComponents__WEBPACK_IMPORTED_MODULE_2__["BooksByAuthorComponents"] },
     { path: 'auth', component: _authenticated_authenticated_component__WEBPACK_IMPORTED_MODULE_3__["AuthenticatedComponent"] },
     { path: 'home', component: _home_home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"] },
+    { path: '', component: _home_home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"] },
+    { path: '**', redirectTo: 'home' },
 ];
 class AppRoutingModule {
 }
