@@ -498,7 +498,7 @@ function AppComponent_div_9_Template(rf, ctx) { if (rf & 1) {
 } }
 const authConfig = {
     issuer: 'https://dev-8515262.okta.com/oauth2/default',
-    redirectUri: window.location.origin,
+    redirectUri: 'http://52.53.203.248/BordersFront/#/auth',
     clientId: '0oa2adalnaHyDP4yG5d6'
 };
 class AppComponent {
@@ -835,6 +835,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+const CALLBACK_PATH = 'login/callback';
 const routes = [
     { path: 'booksByAuthor', component: _components_booksbyauthor_BooksByAuthorComponents__WEBPACK_IMPORTED_MODULE_2__["BooksByAuthorComponents"] },
     { path: 'auth', component: _authenticated_authenticated_component__WEBPACK_IMPORTED_MODULE_3__["AuthenticatedComponent"] },
