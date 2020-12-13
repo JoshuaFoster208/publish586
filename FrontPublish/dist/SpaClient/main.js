@@ -254,14 +254,16 @@ class SearchComponent {
     }
     ngOnChanges() {
         this.test = false;
+        this.books = this.service.getBooks(this.searchValue).subscribe(books => this.books = books);
     }
     runSearch() {
-        //this.searchValue.setValue('');
+        this.books = this.service.getBooks(this.searchValue).subscribe(books => this.books = books);
+        this.searchValue.setValue('');
         this.test = true;
     }
 }
 SearchComponent.ɵfac = function SearchComponent_Factory(t) { return new (t || SearchComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_SearchService__WEBPACK_IMPORTED_MODULE_2__["SearchService"])); };
-SearchComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: SearchComponent, selectors: [["SearchBooks"]], inputs: { test: "test" }, features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([_SearchService__WEBPACK_IMPORTED_MODULE_2__["SearchService"]]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]], decls: 20, vars: 1, consts: [[1, "container"], ["name", "Choice"], ["value", "Authors"], ["value", "Books"], ["type", "text", "placeholder", "Search.."], [3, "click"], [1, "table", "table-bordered"], [4, "ngFor", "ngForOf"]], template: function SearchComponent_Template(rf, ctx) { if (rf & 1) {
+SearchComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: SearchComponent, selectors: [["SearchBooks"]], inputs: { test: "test" }, features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([_SearchService__WEBPACK_IMPORTED_MODULE_2__["SearchService"]]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]], decls: 20, vars: 2, consts: [[1, "container"], ["name", "Choice"], ["value", "Authors"], ["value", "Books"], ["type", "text", "placeholder", "Search..", 3, "formControl"], [3, "click"], [1, "table", "table-bordered"], [4, "ngFor", "ngForOf"]], template: function SearchComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "select", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "option", 2);
@@ -295,9 +297,11 @@ SearchComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCo
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } if (rf & 2) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](19);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("formControl", ctx.searchValue);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](13);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.books);
-    } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgSelectOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["ɵangular_packages_forms_forms_x"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["NgForOf"]], encapsulation: 2 });
+    } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgSelectOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["ɵangular_packages_forms_forms_x"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControlDirective"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["NgForOf"]], encapsulation: 2 });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](SearchComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
@@ -499,6 +503,7 @@ function AuthorsComponent_div_8_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("responseId", ctx_r1.authId);
 } }
+/**/
 class AuthorsComponent {
     constructor(service, service2) {
         this.service = service;
@@ -621,13 +626,13 @@ function AppComponent_div_4_div_1_Template(rf, ctx) { if (rf & 1) {
     const _r14 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 11);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "br");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "br");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "a", 12);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AppComponent_div_4_div_1_Template_a_click_3_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r14); const ctx_r13 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r13.setSelectedTab("admin"); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "button", 5);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5, "Admin Tools");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "a", 12);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AppComponent_div_4_div_1_Template_a_click_2_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r14); const ctx_r13 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r13.setSelectedTab("admin"); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "button", 5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, "Admin Tools");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](5, "br");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
 function AppComponent_div_4_div_17_Template(rf, ctx) { if (rf & 1) {
@@ -872,6 +877,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+/*Component for posting to the author table*/
 class AddAuthorsComponent {
     constructor(service) {
         this.service = service;
@@ -879,6 +885,7 @@ class AddAuthorsComponent {
     }
     ngOnInit() {
     }
+    /*When clicked the value in the authorName form is passed into a post call and then the authorName is reset*/
     onClick() {
         this.service.postAuthor(this.authorName.value);
         this.authorName.setValue('');
@@ -1029,10 +1036,10 @@ class SearchService {
     //books
     constructor(service) {
         this.service = service;
-        this.books = 'http://52.53.203.248/Borders/api/SearchBooks/harry';
+        this.books = 'http://52.53.203.248/Borders/api/SearchBooks';
     }
     getBooks(title) {
-        return this.service.sendGetRequest(this.books);
+        return this.service.sendGetRequest(this.books + '/' + title);
     }
 }
 SearchService.ɵfac = function SearchService_Factory(t) { return new (t || SearchService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_http_service__WEBPACK_IMPORTED_MODULE_1__["HttpService"])); };
@@ -1097,22 +1104,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+/*Component that will display while authenticated*/
 class AuthenticatedComponent {
-    constructor() {
-        this.selectedTab = "authors";
-    }
+    constructor() { }
     ngOnInit() {
-    }
-    setSelectedTab(selected) {
-        this.selectedTab = selected;
     }
 }
 AuthenticatedComponent.ɵfac = function AuthenticatedComponent_Factory(t) { return new (t || AuthenticatedComponent)(); };
-AuthenticatedComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AuthenticatedComponent, selectors: [["app-authenticated"]], decls: 18, vars: 0, consts: [[1, "container"], [1, "titleContainer"], [2, "margin-right", "65%", 3, "click"], [1, "not-active"]], template: function AuthenticatedComponent_Template(rf, ctx) { if (rf & 1) {
+AuthenticatedComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AuthenticatedComponent, selectors: [["app-authenticated"]], decls: 18, vars: 0, consts: [[1, "container"], [1, "titleContainer"], [2, "margin-right", "65%"], [1, "not-active"]], template: function AuthenticatedComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AuthenticatedComponent_Template_div_click_2_listener() { return ctx.setSelectedTab("authors"); });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "h5", 3);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "u");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "b");
@@ -1128,7 +1130,6 @@ AuthenticatedComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵd
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](9, "br");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "div", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AuthenticatedComponent_Template_div_click_11_listener() { return ctx.setSelectedTab("books"); });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "h5", 3);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "u");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "b");
@@ -1234,6 +1235,7 @@ function AddBookComponent_option_11_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](author_r1.name);
 } }
+/*Component for posting to the books table*/
 class AddBookComponent {
     constructor(service, service2) {
         this.service = service;
@@ -1242,9 +1244,11 @@ class AddBookComponent {
         this.numPages = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('');
         this.price = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('');
     }
+    /*retrieves the authors on initialization to populate the select value*/
     ngOnInit() {
         this.authors = this.service2.getAuthors().subscribe(books => this.authors = books);
     }
+    /*When clicked the values in the FormControls and the selectedAuthors ID are passed into a post call and then the values are reset*/
     onClick() {
         this.service.postBook(this.bookName.value, this.selectedAuthor.authorId, this.numPages.value, this.price.value);
         this.bookName.setValue('');
