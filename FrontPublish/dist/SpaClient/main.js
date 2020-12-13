@@ -455,7 +455,7 @@ function AppComponent_div_0_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("Hello, ", ctx_r0.getUserName().name, "");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("Hello, ", ctx_r0.getUserName(), "");
 } }
 function AppComponent_div_1_Template(rf, ctx) { if (rf & 1) {
     const _r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
@@ -498,7 +498,8 @@ function AppComponent_div_9_Template(rf, ctx) { if (rf & 1) {
 } }
 const authConfig = {
     issuer: 'https://dev-8515262.okta.com/oauth2/default',
-    redirectUri: 'http://52.53.203.248/BordersFront',
+    redirectUri: window.location.origin + '/BordersFront/',
+    responseType: 'id_token token',
     clientId: '0oa2adalnaHyDP4yG5d6'
 };
 class AppComponent {
@@ -509,6 +510,8 @@ class AppComponent {
         this.baseUrl = 'https://localhost:44396/';
         this.oauthService.configure(authConfig);
         this.oauthService.loadDiscoveryDocumentAndTryLogin();
+        this.oauthService.oidc = true;
+        this.oauthService.setStorage(sessionStorage);
     }
     login() {
         this.oauthService.initImplicitFlow();
@@ -550,7 +553,7 @@ AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCompo
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx.getUserName());
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.getUserName());
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx.getUserName());
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.selectedTab == "authors");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
