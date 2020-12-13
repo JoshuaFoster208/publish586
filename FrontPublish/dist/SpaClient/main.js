@@ -498,7 +498,7 @@ function AppComponent_div_9_Template(rf, ctx) { if (rf & 1) {
 } }
 const authConfig = {
     issuer: 'https://dev-8515262.okta.com/oauth2/default',
-    redirectUri: 'http://52.53.203.248/BordersFront/#/auth',
+    redirectUri: 'http://52.53.203.248/BordersFront',
     clientId: '0oa2adalnaHyDP4yG5d6'
 };
 class AppComponent {
