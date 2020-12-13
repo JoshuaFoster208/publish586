@@ -21,6 +21,7 @@ class BooksByAuthorService {
         this.service = service;
         this.books = 'http://52.53.203.248/Borders/api/BooksByAuthor';
     }
+    /*http call to retrieve the list of books with the given authorId*/
     getBooksByAuthor(ID) {
         return this.service.sendGetRequest(this.books + "/" + ID);
     }
@@ -70,9 +71,11 @@ class BooksService {
         this.service = service;
         this.books = 'http://52.53.203.248/Borders/api/Books';
     }
+    /*retrieves all books from the table*/
     getBooks() {
         return this.service.sendGetRequest(this.books);
     }
+    /*converts all values to json and then posts to the authors table*/
     postBook(title, authorId, pages, price) {
         let jsonData = JSON.stringify({
             title: title,
@@ -178,9 +181,11 @@ class HttpService {
     constructor(httpClient) {
         this.httpClient = httpClient;
     }
+    /*sends http get request to the url passed in*/
     sendGetRequest(url) {
         return this.httpClient.get(url);
     }
+    /*sends http post request of the data passed in to the url passed in*/
     sendPostRequest(data, url) {
         return this.httpClient.post(url, data, httpOptions).subscribe((result) => result);
     }
@@ -244,18 +249,20 @@ function SearchComponent_tr_19_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](book_r1.price);
 } }
+/*Component that takes an input and searches the database for the value*/
 class SearchComponent {
     constructor(service) {
         this.service = service;
         this.searchValue = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]('');
     }
     ngOnInit() {
-        this.books = this.service.getBooks(this.searchValue).subscribe(books => this.books = books);
     }
+    /*on input change call the service to search for books*/
     ngOnChanges() {
         this.test = false;
         this.books = this.service.getBooks(this.searchValue).subscribe(books => this.books = books);
     }
+    /*function that onclick will search the database*/
     runSearch() {
         this.books = this.service.getBooks(this.searchValue).subscribe(books => this.books = books);
         this.searchValue.setValue('');
@@ -360,10 +367,12 @@ function BooksComponent_tr_11_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](book_r1.price);
 } }
+/*component that returns and displays a list of books from the books table*/
 class BooksComponent {
     constructor(service) {
         this.service = service;
     }
+    /*retrieves the list of books on initialization*/
     ngOnInit() {
         this.books = this.service.getBooks().subscribe(books => this.books = books);
     }
@@ -426,9 +435,11 @@ class AuthorsService {
         this.service = service;
         this.authors = 'http://52.53.203.248/Borders/api/Authors';
     }
+    /*retrieve all authors*/
     getAuthors() {
         return this.service.sendGetRequest(this.authors);
     }
+    /*post json of author value*/
     postAuthor(data) {
         let jsonData = JSON.stringify({
             name: data
@@ -503,15 +514,19 @@ function AuthorsComponent_div_8_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("responseId", ctx_r1.authId);
 } }
+/*Displays the authorsList component, can have a child component in booksbyauthor on click the selected authorid will update in the authId
+* in the booksbyauthor*/
 class AuthorsComponent {
     constructor(service, service2) {
         this.service = service;
         this.service2 = service2;
         this.authId = 0;
     }
+    /*Retrieves list of books on initialization*/
     ngOnInit() {
         this.authors = this.service.getAuthors().subscribe(books => this.authors = books);
     }
+    /*If an author is clicked pass the ID for a get call in booksbyauthor and if an author is clicked again remove the booksbyauthorcomponent*/
     onSelect(selAuthor) {
         if (this.selectedAuthor != selAuthor) {
             this.selectedAuthor = selAuthor;
@@ -692,6 +707,7 @@ function AppComponent_div_4_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r3.selectedTab == "books");
 } }
+/*main component for the spa application*/
 const authConfig = {
     issuer: 'https://dev-8515262.okta.com/oauth2/default',
     redirectUri: window.location.origin + '/BordersFront/',
@@ -711,13 +727,16 @@ class AppComponent {
         this.oauthService.oidc = true;
         this.oauthService.setStorage(sessionStorage);
     }
+    /*function for logging in as a developer*/
     login() {
         this.oauthService.initImplicitFlow();
     }
+    /*function for logging out as a developer and resets the chosen tab*/
     logout() {
         this.oauthService.logOut();
         this.setSelectedTab('authors');
     }
+    /*retrieves the name saved in okta of the user and returns null if not signed in*/
     getUserName() {
         const claims = this.oauthService.getIdentityClaims();
         if (!claims) {
@@ -725,13 +744,16 @@ class AppComponent {
         }
         return claims['name'];
     }
+    /*Updates the selectedTab with the string value passed in*/
     setSelectedTab(selected) {
         this.selectedTab = selected;
     }
+    /*flips the activated tab*/
     setActiveClass1() {
         this.statusClass1 = 'active';
         this.statusClass2 = 'not-active';
     }
+    /*flips the activated tab*/
     setActiveClass2() {
         this.statusClass1 = 'not-active';
         this.statusClass2 = 'active';
@@ -814,9 +836,11 @@ class BooksByAuthorComponents {
         this.service = service;
         this.service2 = service2;
     }
+    /*retrieves all books that have the matching authorId on init*/
     ngOnInit() {
         this.books = this.service.getBooksByAuthor(this.service2.getSelectedAuthor()).subscribe(books => this.books = books);
     }
+    /*retrieves all books that have the matching authorId on value change in the component*/
     ngOnChanges() {
         this.books = this.service.getBooksByAuthor(this.responseId).subscribe(books => this.books = books);
     }
@@ -876,6 +900,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+/*Component for posting to the author table*/
 class AddAuthorsComponent {
     constructor(service) {
         this.service = service;
@@ -883,6 +908,7 @@ class AddAuthorsComponent {
     }
     ngOnInit() {
     }
+    /*When clicked the value in the authorName form is passed into a post call and then the authorName is reset*/
     onClick() {
         this.service.postAuthor(this.authorName.value);
         this.authorName.setValue('');
@@ -957,14 +983,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 class AppModule {
 }
 AppModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]] });
 AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector"]({ factory: function AppModule_Factory(t) { return new (t || AppModule)(); }, providers: [], imports: [[
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
             _app_routing_module__WEBPACK_IMPORTED_MODULE_5__["AppRoutingModule"],
-            //NgbModule,
             _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClientModule"],
             angular_oauth2_oidc__WEBPACK_IMPORTED_MODULE_11__["OAuthModule"].forRoot(),
             _angular_forms__WEBPACK_IMPORTED_MODULE_7__["ReactiveFormsModule"],
@@ -980,7 +1004,6 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
         _components_Admin_AddBookComponent__WEBPACK_IMPORTED_MODULE_13__["AddBookComponent"],
         _components_Search_SearchComponent__WEBPACK_IMPORTED_MODULE_14__["SearchComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
         _app_routing_module__WEBPACK_IMPORTED_MODULE_5__["AppRoutingModule"],
-        //NgbModule,
         _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClientModule"], angular_oauth2_oidc__WEBPACK_IMPORTED_MODULE_11__["OAuthModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["ReactiveFormsModule"],
         _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormsModule"]] }); })();
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵsetClassMetadata"](AppModule, [{
@@ -1000,7 +1023,6 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
                 imports: [
                     _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
                     _app_routing_module__WEBPACK_IMPORTED_MODULE_5__["AppRoutingModule"],
-                    //NgbModule,
                     _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClientModule"],
                     angular_oauth2_oidc__WEBPACK_IMPORTED_MODULE_11__["OAuthModule"].forRoot(),
                     _angular_forms__WEBPACK_IMPORTED_MODULE_7__["ReactiveFormsModule"],
@@ -1035,6 +1057,7 @@ class SearchService {
         this.service = service;
         this.books = 'http://52.53.203.248/Borders/api/SearchBooks';
     }
+    /*http get call to search for a specific title*/
     getBooks(title) {
         return this.service.sendGetRequest(this.books + '/' + title);
     }
@@ -1101,22 +1124,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+/*Component that will display while authenticated*/
 class AuthenticatedComponent {
-    constructor() {
-        this.selectedTab = "authors";
-    }
+    constructor() { }
     ngOnInit() {
-    }
-    setSelectedTab(selected) {
-        this.selectedTab = selected;
     }
 }
 AuthenticatedComponent.ɵfac = function AuthenticatedComponent_Factory(t) { return new (t || AuthenticatedComponent)(); };
-AuthenticatedComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AuthenticatedComponent, selectors: [["app-authenticated"]], decls: 18, vars: 0, consts: [[1, "container"], [1, "titleContainer"], [2, "margin-right", "65%", 3, "click"], [1, "not-active"]], template: function AuthenticatedComponent_Template(rf, ctx) { if (rf & 1) {
+AuthenticatedComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AuthenticatedComponent, selectors: [["app-authenticated"]], decls: 18, vars: 0, consts: [[1, "container"], [1, "titleContainer"], [2, "margin-right", "65%"], [1, "not-active"]], template: function AuthenticatedComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AuthenticatedComponent_Template_div_click_2_listener() { return ctx.setSelectedTab("authors"); });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "h5", 3);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "u");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "b");
@@ -1132,7 +1150,6 @@ AuthenticatedComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵd
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](9, "br");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "div", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AuthenticatedComponent_Template_div_click_11_listener() { return ctx.setSelectedTab("books"); });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "h5", 3);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "u");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "b");
@@ -1181,10 +1198,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+/*Sets the routes of the SPA application*/
 const routes = [
     { path: 'booksByAuthor', component: _components_booksbyauthor_BooksByAuthorComponents__WEBPACK_IMPORTED_MODULE_2__["BooksByAuthorComponents"] },
     { path: 'auth', component: _authenticated_authenticated_component__WEBPACK_IMPORTED_MODULE_3__["AuthenticatedComponent"] },
     { path: 'home', component: _home_home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"] },
+    { path: '', redirectTo: '/', pathMatch: 'full' },
 ];
 /*,{useHash:true}*/
 class AppRoutingModule {
@@ -1237,6 +1256,7 @@ function AddBookComponent_option_11_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](author_r1.name);
 } }
+/*Component for posting to the books table*/
 class AddBookComponent {
     constructor(service, service2) {
         this.service = service;
@@ -1245,9 +1265,11 @@ class AddBookComponent {
         this.numPages = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('');
         this.price = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('');
     }
+    /*retrieves the authors on initialization to populate the select value*/
     ngOnInit() {
         this.authors = this.service2.getAuthors().subscribe(books => this.authors = books);
     }
+    /*When clicked the values in the FormControls and the selectedAuthors ID are passed into a post call and then the values are reset*/
     onClick() {
         this.service.postBook(this.bookName.value, this.selectedAuthor.authorId, this.numPages.value, this.price.value);
         this.bookName.setValue('');
