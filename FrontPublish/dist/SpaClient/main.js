@@ -498,7 +498,7 @@ function AppComponent_div_9_Template(rf, ctx) { if (rf & 1) {
 } }
 const authConfig = {
     issuer: 'https://dev-8515262.okta.com/oauth2/default',
-    redirectUri: window.location.origin + '/BordersFront/',
+    redirectUri: window.location.origin + '/BordersFront/Auth',
     responseType: 'id_token token',
     clientId: '0oa2adalnaHyDP4yG5d6'
 };
