@@ -893,6 +893,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _authors_AuthorsService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../authors/AuthorsService */ "MvnF");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+/* harmony import */ var _AddBookComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AddBookComponent */ "wbJp");
+/* harmony import */ var _books_BooksService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../books/BooksService */ "3HRk");
+
+
+
 
 
 
@@ -901,8 +906,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /*Component for posting to the author table*/
 class AddAuthorsComponent {
-    constructor(service) {
+    constructor(service, service2) {
         this.service = service;
+        this.service2 = service2;
         this.authorName = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('');
     }
     ngOnInit() {
@@ -911,10 +917,12 @@ class AddAuthorsComponent {
     onClick() {
         this.service.postAuthor(this.authorName.value);
         this.authorName.setValue('');
+        let aBC = new _AddBookComponent__WEBPACK_IMPORTED_MODULE_3__["AddBookComponent"](this.service2, this.service);
+        aBC.loadAuthors();
     }
 }
-AddAuthorsComponent.ɵfac = function AddAuthorsComponent_Factory(t) { return new (t || AddAuthorsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_authors_AuthorsService__WEBPACK_IMPORTED_MODULE_1__["AuthorsService"])); };
-AddAuthorsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AddAuthorsComponent, selectors: [["addAuthor"]], features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([_authors_AuthorsService__WEBPACK_IMPORTED_MODULE_1__["AuthorsService"]])], decls: 5, vars: 1, consts: [["type", "text", "placeholder", "Author...", 3, "formControl"], [3, "click"]], template: function AddAuthorsComponent_Template(rf, ctx) { if (rf & 1) {
+AddAuthorsComponent.ɵfac = function AddAuthorsComponent_Factory(t) { return new (t || AddAuthorsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_authors_AuthorsService__WEBPACK_IMPORTED_MODULE_1__["AuthorsService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_books_BooksService__WEBPACK_IMPORTED_MODULE_4__["BooksService"])); };
+AddAuthorsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AddAuthorsComponent, selectors: [["addAuthor"]], features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([_authors_AuthorsService__WEBPACK_IMPORTED_MODULE_1__["AuthorsService"], _books_BooksService__WEBPACK_IMPORTED_MODULE_4__["BooksService"]])], decls: 5, vars: 1, consts: [["type", "text", "placeholder", "Author...", 3, "formControl"], [3, "click"]], template: function AddAuthorsComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "label");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "input", 0);
@@ -933,9 +941,9 @@ AddAuthorsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefi
         args: [{
                 selector: 'addAuthor',
                 templateUrl: './AddAuthor.html',
-                providers: [_authors_AuthorsService__WEBPACK_IMPORTED_MODULE_1__["AuthorsService"]]
+                providers: [_authors_AuthorsService__WEBPACK_IMPORTED_MODULE_1__["AuthorsService"], _books_BooksService__WEBPACK_IMPORTED_MODULE_4__["BooksService"]]
             }]
-    }], function () { return [{ type: _authors_AuthorsService__WEBPACK_IMPORTED_MODULE_1__["AuthorsService"] }]; }, null); })();
+    }], function () { return [{ type: _authors_AuthorsService__WEBPACK_IMPORTED_MODULE_1__["AuthorsService"] }, { type: _books_BooksService__WEBPACK_IMPORTED_MODULE_4__["BooksService"] }]; }, null); })();
 
 
 /***/ }),
@@ -1265,6 +1273,10 @@ class AddBookComponent {
     }
     /*retrieves the authors on initialization to populate the select value*/
     ngOnInit() {
+        this.loadAuthors();
+    }
+    /*retrieves the authors on initialization to populate the select value*/
+    loadAuthors() {
         this.authors = this.service2.getAuthors().subscribe(books => this.authors = books);
     }
     /*When clicked the values in the FormControls and the selectedAuthors ID are passed into a post call and then the values are reset*/
@@ -1273,6 +1285,7 @@ class AddBookComponent {
         this.bookName.setValue('');
         this.numPages.setValue('');
         this.price.setValue('');
+        this.selectedAuthor = null;
     }
 }
 AddBookComponent.ɵfac = function AddBookComponent_Factory(t) { return new (t || AddBookComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_books_BooksService__WEBPACK_IMPORTED_MODULE_1__["BooksService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_authors_AuthorsService__WEBPACK_IMPORTED_MODULE_3__["AuthorsService"])); };
